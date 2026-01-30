@@ -61,3 +61,6 @@ Fixes: #12 Related to: #8, #9
 ## Repo Hygiene
 - Do not commit secrets or credentials
 - Keep generated artifacts out of git (see `.gitignore`)
+
+## Reference
+- https://bolob.tistory.com/entry/Essay-%EA%B9%83-%EC%BB%A8%EB%B2%A4%EC%85%98-%EC%9E%91%EC%84%B1-%EB%B0%A9%EB%B2%95
