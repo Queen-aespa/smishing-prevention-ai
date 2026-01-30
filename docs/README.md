@@ -1,3 +1,5 @@
 # Docs
 
-Project documentation lives here (architecture, API, onboarding, runbooks, etc.).
+## Conventions
+- `docs/conventions/git.md`
+- `docs/conventions/project.md`
