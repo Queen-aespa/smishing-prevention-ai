@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "282652266188",
+    "project_id": "keyboardapp-f2bfb",
+    "storage_bucket": "keyboardapp-f2bfb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282652266188:android:5dabe7db5adf480fd3bc69",
+        "android_client_info": {
+          "package_name": "com.kotlinsun.cyberkeyboardtest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAj1WKMj4d2xXzpMlE-NDznj88I71-Stg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282652266188:android:c53ec9a54bd11048d3bc69",
+        "android_client_info": {
+          "package_name": "com.kotlinsun.smishingpreventionai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAj1WKMj4d2xXzpMlE-NDznj88I71-Stg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
