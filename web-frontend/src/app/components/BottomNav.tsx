@@ -1,4 +1,4 @@
-import { Search, FileText, User } from "lucide-react";
+import { Home, MessageSquare, User } from "lucide-react";
 
 interface BottomNavProps {
   activeTab: string;
@@ -7,9 +7,9 @@ interface BottomNavProps {
 
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   const tabs = [
-    { id: "search", label: "조회", icon: Search },
-    { id: "report", label: "신고", icon: FileText },
-    { id: "profile", label: "내정보", icon: User },
+    { id: "community", label: "커뮤니티", icon: MessageSquare },
+    { id: "home", label: "홈", icon: Home },
+    { id: "profile", label: "마이페이지", icon: User },
   ];
 
   return (
