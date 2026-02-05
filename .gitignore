@@ -26,3 +26,6 @@ android-app/local.properties
 .env
 .env.local
 .env.*.local
+
+# Firebase service account keys
+keyboardapp-f2bfb-firebase-adminsdk-fbsvc-1e64caa89d.json
