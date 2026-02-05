@@ -2,6 +2,8 @@
 
 안드로이드 앱(Kotlin + Firebase)과 웹(React + Spring Boot + Firebase)을 함께 관리하는 모노레포입니다.
 
+![메인 페이지](docs/docs_image/main_page.png)
+
 ## 프로젝트 구조
 - `android-app/`: Android 앱 (Kotlin + Firebase)
 - `web-frontend/`: 웹 프론트엔드 (Vite + React + Firebase)
