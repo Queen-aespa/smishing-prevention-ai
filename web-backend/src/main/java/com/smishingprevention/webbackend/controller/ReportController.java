@@ -15,8 +15,13 @@ import java.util.List;
 @RequestMapping("/api/reports") 
 @RequiredArgsConstructor
 @CrossOrigin(
-        origins = {"http://localhost:3000", "http://127.0.0.1:3000", "https://smishing-prevention-ai.onrender.com/api/reports/web"},
-        originPatterns = {"https://*.vercel.app"}
+    origins = {
+        "http://localhost:3000", 
+        "http://127.0.0.1:3000",
+        "https://smishing-prevention-ai.vercel.app" // [수정] 실제 프론트엔드 배포 주소로 변경
+    },
+    allowedHeaders = "*",
+    methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS}
 ) // 프론트엔드 주소 허용
 public class ReportController {
 
