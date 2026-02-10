@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { UserInfoSection } from "@/app/components/UserInfoSection";
 import { SearchSection } from "@/app/components/SearchSection";
-import { ReportSection, CriminalData } from "@/app/components/ReportSection";
+import { ReportSection } from "@/app/components/ReportSection";
+import type { CriminalData } from "@/app/components/ReportSection";
 import { SearchResults } from "@/app/components/SearchResults";
 import { BottomNav } from "@/app/components/BottomNav";
 import { Shield, Bell } from "lucide-react";
@@ -82,7 +83,7 @@ export default function App() {
     }
   };
 
-  const handleReport = (data: CriminalData) => {
+  const handleReport = (_data: CriminalData) => {
     // Mock report submission
     toast.success("신고가 접수되었습니다. 검토 후 등록됩니다.");
   };
