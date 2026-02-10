@@ -127,7 +127,7 @@ if (secureAdminForm) {
 
         try {
             const hashedKey = await generateHash(inputKey);
-            const docRef = await db.collection('admin_codes').doc(hashedKey).get();
+            const docRef = await db.collection('admin_key').doc(hashedKey).get();
             if (!docRef.exists) { alert("인증 키 불일치"); return; }
 
             const userCredential = await auth.createUserWithEmailAndPassword(email, password);
