@@ -7,12 +7,17 @@ import CommunityPage from "@/pages/CommunityPage";
 import ProfilePage from "@/pages/ProfilePage";
 import LoginPage from "@/pages/LoginPage";
 import SignupPage from "@/pages/SignupPage";
+import ExternalRedirectPage from "@/pages/ExternalRedirectPage";
 
 export default function AppRouter() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+      <Route path="/admin/login" element={<ExternalRedirectPage to="/admin/index.html" />} />
+      <Route path="/admin/signup" element={<ExternalRedirectPage to="/admin/admin-signup.html" />} />
+      <Route path="/admin/dashboard" element={<ExternalRedirectPage to="/admin/admin.html" />} />
       <Route element={<AppShell />}>
         <Route index element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<HomePage />} />

@@ -6,6 +6,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.firestore.*;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
 import com.google.firebase.cloud.StorageClient;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,10 @@ public class ReportService {
      * [수정됨] 커뮤니티 리포트 + 웹 리포트 통합 조회 (최신순 정렬)
      */
     public List<ReportDetailResponse> getAllReportsWithUserInfo() throws ExecutionException, InterruptedException {
+        if (FirebaseApp.getApps().isEmpty()) {
+            return new ArrayList<>();
+        }
+
         Firestore db = FirestoreClient.getFirestore();
         List<ReportDetailResponse> responseList = new ArrayList<>();
 

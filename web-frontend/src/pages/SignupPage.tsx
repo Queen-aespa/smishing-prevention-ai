@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { Sparkles } from "lucide-react";
 import { auth, db } from "@/firebase";
@@ -48,7 +48,7 @@ export default function SignupPage() {
       });
 
       navigate("/");
-    } catch (err: any) {
+    } catch {
       setError("회원가입 중 오류가 발생했습니다.");
     } finally {
       setLoading(false);

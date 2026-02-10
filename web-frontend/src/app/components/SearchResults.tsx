@@ -1,5 +1,4 @@
 import { AlertTriangle, Phone, Globe, CreditCard, Tag } from "lucide-react";
-import { Card } from "@/app/components/ui/card";
 import { Badge } from "@/app/components/ui/badge";
 
 interface SearchResult {

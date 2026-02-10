@@ -1,5 +1,4 @@
 import { User } from "lucide-react";
-import { Card } from "@/app/components/ui/card";
 import { Label } from "@/app/components/ui/label";
 import {
   Select,
