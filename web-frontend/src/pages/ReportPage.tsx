@@ -21,7 +21,7 @@ export default function ReportPage() {
 
     if (!currentUser) {
       toast.error("로그인이 필요한 서비스입니다.");
-      navigate('/login'); // 로그인 페이지 경로로 이동 (만약 회원가입 페이지라면 '/signup'으로 변경)
+      navigate('/login');
       return;
     }
 

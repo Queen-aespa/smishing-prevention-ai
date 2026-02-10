@@ -1,11 +1,11 @@
 // 1. Firebase 설정 (본인의 키로 교체 필요)
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+  apiKey: "AIzaSyAfIleXrkpPrFElNjky3p7Zwl-3v2npR2A",
+  authDomain: "keyboardapp-f2bfb.firebaseapp.com",
+  projectId: "keyboardapp-f2bfb",
+  storageBucket: "keyboardapp-f2bfb.firebasestorage.app",
+  messagingSenderId: "282652266188",
+  appId: "1:282652266188:web:602191e43e9f3a74d3bc69"
 };
 
 if (!firebase.apps.length) {

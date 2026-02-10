@@ -4,12 +4,12 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyAfIleXrkpPrFElNjky3p7Zwl-3v2npR2A",
+  authDomain: "keyboardapp-f2bfb.firebaseapp.com",
+  projectId: "keyboardapp-f2bfb",
+  storageBucket: "keyboardapp-f2bfb.firebasestorage.app",
+  messagingSenderId: "282652266188",
+  appId: "1:282652266188:web:602191e43e9f3a74d3bc69"
 };
 
 
