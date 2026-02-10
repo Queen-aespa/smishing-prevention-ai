@@ -1,22 +1,9 @@
 import { useMemo, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Shield, Bell, LogOut } from "lucide-react";
-import { BottomNav } from "@/app/components/BottomNav";
 import { Toaster } from "@/app/components/ui/sonner";
 import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
-
-const tabToPath: Record<string, string> = {
-  home: "/home",
-  community: "/community",
-  profile: "/profile",
-};
-
-const pathToTab: Record<string, string> = {
-  "/home": "home",
-  "/community": "community",
-  "/profile": "profile",
-};
 
 const headerMap: Record<
   string,
@@ -54,24 +41,12 @@ export default function AppShell() {
   const location = useLocation();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const activeTab = useMemo(() => {
-    const match = Object.keys(pathToTab).find((path) =>
-      location.pathname.startsWith(path)
-    );
-    return match ? pathToTab[match] : "home";
-  }, [location.pathname]);
-
   const headerMeta = useMemo(() => {
     const match = Object.keys(headerMap).find((path) =>
       location.pathname.startsWith(path)
     );
     return match ? headerMap[match] : headerMap["/home"];
   }, [location.pathname]);
-
-  const handleTabChange = (tab: string) => {
-    const target = tabToPath[tab] ?? "/search";
-    navigate(target);
-  };
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
@@ -121,11 +96,9 @@ export default function AppShell() {
           </div>
         </div>
 
-        <div className="pb-20 overflow-y-auto">
+        <div className="pb-4 overflow-y-auto">
           <Outlet />
         </div>
-
-        <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
       </div>
     </div>
   );

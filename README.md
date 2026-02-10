@@ -67,3 +67,14 @@ cd web-backend
 
 ## 문서
 - `docs/README.md` 참고
+
+## GitHub Actions 배포 (Monorepo)
+`main` 브랜치 푸시 시 프론트/백엔드를 각각 빌드하고 배포 훅을 호출하도록 구성되어 있습니다.
+
+필수 GitHub Secrets:
+- `FRONTEND_DEPLOY_HOOK_URL`: 프론트 서비스 배포 훅 URL
+- `BACKEND_DEPLOY_HOOK_URL`: 백엔드 서비스 배포 훅 URL
+
+워크플로우:
+- `.github/workflows/deploy-frontend.yml`
+- `.github/workflows/deploy-backend.yml`
