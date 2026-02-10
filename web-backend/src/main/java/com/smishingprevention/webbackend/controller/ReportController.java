@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/reports") // 이 주소로 호출됨
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000") // 리액트(5173) 접근 허용
+@CrossOrigin(origins = {"http://localhost:3000", "http://127.0.0.1:3000"}) // 프론트엔드 주소 허용
 public class ReportController {
 
     private final ReportService reportService;
