@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import { getAuth } from "firebase/auth"; // [추가] Firebase Auth 임포트
 import { ReportSection } from "@/app/components/ReportSection";
 import type { CriminalData } from "@/app/components/ReportSection";
@@ -17,6 +17,7 @@ export default function ReportPage() {
     // [추가] 현재 로그인한 유저 UID 가져오기
     const auth = getAuth();
     const currentUser = auth.currentUser;
+
 
     if (!currentUser) {
       toast.error("로그인이 필요한 서비스입니다.");

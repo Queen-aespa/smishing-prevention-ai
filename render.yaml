@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: smishing-backend
+    runtime: java
+    plan: free
+    rootDir: web-backend
+    buildCommand: ./gradlew clean bootJar -x test
+    startCommand: java -jar build/libs/web-backend-0.0.1-SNAPSHOT.jar
+    healthCheckPath: /api/reports
+    envVars:
+      - key: APICK_API_KEY
+        sync: false
+      - key: APICK_API_URL
+        value: https://apick.app/rest/check_spam_number
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FIREBASE_CREDENTIALS_PATH
+        sync: false
+      - key: FIREBASE_DISABLED
+        value: "false"
