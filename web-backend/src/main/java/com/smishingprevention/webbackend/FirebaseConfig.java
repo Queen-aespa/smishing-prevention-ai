@@ -39,6 +39,7 @@ public class FirebaseConfig {
                 // 2. 읽어온 키로 옵션을 설정합니다.
                 FirebaseOptions options = FirebaseOptions.builder()
                         .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                        .setStorageBucket("keyboardapp-f2bfb.firebasestorage.app")
                         .build();
 
                 // 3. 초기화
