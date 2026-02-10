@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/reports") 
 @RequiredArgsConstructor
 // 리액트 Vite 기본 포트인 5173도 추가해주는 것이 좋습니다.
-@CrossOrigin(origins = {"http://localhost:3000"}) 
+@CrossOrigin(origins = {"http://localhost:3000", "http://127.0.0.1:3000"}) // 프론트엔드 주소 허용
 public class ReportController {
 
     private final ReportService reportService;
