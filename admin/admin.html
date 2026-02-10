@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피싱 방지 시스템 - 관리자 대시보드</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>피싱 방지 시스템</h3>
+                <span>관리자 대시보드</span>
+            </div>
+            <ul class="menu">
+                <li class="active" onclick="switchTab('dashboard')">
+                    <i class="fas fa-chart-line"></i> 실시간 대시보드
+                </li>
+                <li onclick="switchTab('reports')">
+                    <i class="fas fa-file-alt"></i> 신고 사례 관리
+                </li>
+                <li onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> 로그아웃
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <section id="dashboard-section" class="page-section" style="height: 100%; display: flex; flex-direction: column;">
+                <div class="section-header">
+                    <h2>전체 대시보드</h2>
+                    <p>시스템 현황 및 통계를 실시간으로 확인하세요.</p>
+                </div>
+
+                <div class="stats-summary">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #e0e7ff; color: #3730a3;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>총 사용자 수</h4>
+                            <p id="totalUsersCount">- 명</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #dcfce7; color: #166534;">
+                            <i class="fas fa-search-location"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>총 분석 건수</h4>
+                            <p id="totalReportsCount">- 건</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #ffedd5; color: #9a3412;">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>최근 7일 분석</h4>
+                            <p id="recentReportsCount">- 건</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="card chart-card">
+                        <h3>📈 위험도 발생 추이 (최근 7일)</h3>
+                        <div class="canvas-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <h3>🔍 사기 유형별 분류 (상위순)</h3>
+                        <div class="canvas-container">
+                            <canvas id="categoryChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <h3>⚠️ 사용자 위험도 비율</h3>
+                        <div class="canvas-container" style="max-height: 200px;"> <canvas id="riskRatioChart"></canvas>
+                        </div>
+                        <div id="riskTextSummary" class="risk-summary">
+                            <div class="risk-row">
+                                <span class="dot warning"></span> WARNING 이상 비율: <strong id="riskHighRatio">- %</strong>
+                            </div>
+                            <div class="risk-row">
+                                <span class="dot stop"></span> STOP 진입 전 감지: <strong id="riskPreventCount">- 건</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card chart-card">
+                        <h3>👥 연령대별/성별 의심 신고</h3>
+                        <div class="canvas-container">
+                            <canvas id="demographicChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reports-section" class="page-section hidden">
+                <div class="section-header">
+                    <h2>신고 사례 관리</h2>
+                    <p>사용자가 신고한 모든 사례를 확인하고 분석하세요.</p>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" id="searchInput" placeholder="내용 검색" onkeyup="filterReports()">
+                    <select id="categoryFilter" onchange="filterReports()">
+                        <option value="">전체 분류</option>
+                        <option value="기관 사칭">기관 사칭</option>
+                        <option value="지인 사칭">지인 사칭</option>
+                        <option value="링크/앱 유도">링크/앱 유도</option>
+                        <option value="투자 사기">투자 사기</option>
+                        <option value="관계형 사기">관계형 사기</option>
+                        <option value="협박 사기">협박 사기</option>
+                    </select>
+                </div>
+
+                <div class="table-container card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>신고 ID</th>
+                                <th>요약</th>
+                                <th>위험도</th>
+                                <th>분류</th>
+                                <th>신고 일시</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportTableBody"></tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination-container" id="paginationControls"></div>
+                <div id="pageInfo" style="margin-top: 10px; text-align: right; font-size: 0.9rem; color: #666;"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="detailModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <span id="modalRiskBadge" class="badge"></span>
+                    <span id="modalDate" style="color: #666; font-size: 0.9rem; margin-left: 10px;"></span>
+                </div>
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <h3 id="modalSummaryTitle" style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.5;"></h3>
+
+                <div class="reporter-card">
+                    <div class="reporter-icon"><i class="fas fa-user-secret"></i></div>
+                    <div>
+                        <div style="font-weight: bold;">신고자 정보</div>
+                        <div id="modalReporterInfo" style="font-size: 0.9rem; color: #666; margin-top: 4px;">-</div>
+                    </div>
+                </div>
+
+                <div class="advice-card">
+                    <div style="font-weight: bold; margin-bottom: 8px;"><i class="fas fa-shield-alt"></i> AI 보안 조언</div>
+                    <div id="modalAdvice" style="font-size: 0.9rem; line-height: 1.5; color: #374151;">-</div>
+                </div>
+
+                <div class="modal-grid-row">
+                    <div class="info-block">
+                        <label>컨텍스트 정보</label>
+                        <div class="box-light" id="modalContext"></div>
+                        <div id="modalRiskFactors" style="margin-top: 10px;"></div>
+                    </div>
+                    <div class="info-block">
+                        <label>첨부 이미지</label>
+                        <div id="modalImageContainer" class="image-box"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
