@@ -8,7 +8,7 @@ import type { CriminalData } from "@/app/components/ReportSection";
 
 export default function ReportPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const API_URL = "http://localhost:8080/api/reports/web"; 
+  const API_URL = "https://smishing-prevention-ai.onrender.com/api/reports"; 
   const navigate = useNavigate();
 
   const handleReport = async (data: CriminalData, files: File[]) => {
