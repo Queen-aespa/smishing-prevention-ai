@@ -14,7 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/reports") 
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "http://127.0.0.1:3000"}) // 프론트엔드 주소 허용
+@CrossOrigin(
+        origins = {"http://localhost:3000", "http://127.0.0.1:3000"},
+        originPatterns = {"https://*.vercel.app"}
+) // 프론트엔드 주소 허용
 public class ReportController {
 
     private final ReportService reportService;

@@ -13,6 +13,7 @@ import {
   ChevronLeft, // 이전 아이콘 추가
   ChevronRight // 다음 아이콘 추가
 } from "lucide-react";
+import { API_BASE_URL } from "@/config/api";
 
 // 백엔드 DTO 타입 정의
 interface ReportData {
@@ -45,7 +46,7 @@ export default function CommunityPage() {
       try {
         setLoading(true);
         setError("");
-        const response = await axios.get("http://localhost:8080/api/reports");
+        const response = await axios.get(`${API_BASE_URL}/api/reports`);
         setReports(Array.isArray(response.data) ? response.data : []);
       } catch (err) {
         console.error("데이터 로딩 실패:", err);

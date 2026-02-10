@@ -4,6 +4,7 @@ import { Shield, Loader2, ShieldCheck, ShieldAlert } from "lucide-react";
 import { toast } from "sonner";
 import { SearchSection } from "@/app/components/SearchSection";
 import { SearchResults } from "@/app/components/SearchResults";
+import { API_BASE_URL } from "@/config/api";
 
 // ✨ [수정] 백엔드 DTO와 정확히 일치시킨 인터페이스
 interface SearchResult {
@@ -31,7 +32,7 @@ export default function SearchPage() {
     
     try {
       // 백엔드 호출
-      const response = await axios.post("http://localhost:8080/api/search", {
+      const response = await axios.post(`${API_BASE_URL}/api/search`, {
         type: type,   // DTO의 type 필드 매핑
         query: query  // DTO의 query 필드 매핑
       });
