@@ -1,12 +1,10 @@
-// 1. Firebase 설정 (본인의 키로 교체 필요)
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
-};
+// 1. Firebase 설정 (빌드 시 생성되는 firebase-config.js에서 주입)
+const firebaseConfig = window.__ADMIN_FIREBASE_CONFIG__;
+if (!firebaseConfig || !firebaseConfig.apiKey) {
+    const reason = window.__ADMIN_FIREBASE_CONFIG_ERROR__ || "firebase-config.js not generated";
+    alert("관리자 Firebase 설정이 누락되었습니다. 배포 환경변수(VITE_FIREBASE_*)를 확인하세요.\n" + reason);
+    throw new Error("[admin] Missing Firebase config: " + reason);
+}
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -32,6 +30,12 @@ async function generateHash(message) {
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function findAdminKeyDocument(hashedKey) {
+    const keyDoc = await db.collection('admin_key').doc(hashedKey).get();
+    if (keyDoc.exists) return keyDoc;
+    return db.collection('admin_codes').doc(hashedKey).get();
 }
 
 // 사기 유형 라벨링
@@ -127,7 +131,7 @@ if (secureAdminForm) {
 
         try {
             const hashedKey = await generateHash(inputKey);
-            const docRef = await db.collection('admin_codes').doc(hashedKey).get();
+            const docRef = await findAdminKeyDocument(hashedKey);
             if (!docRef.exists) { alert("인증 키 불일치"); return; }
 
             const userCredential = await auth.createUserWithEmailAndPassword(email, password);
