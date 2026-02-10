@@ -45,8 +45,6 @@ export default function SignupPage() {
         region: region,
         job: job,
         createdAt: Number(Date.now()), // Number 타입 타임스탬프
-        recentSearchCount: 0, // 홈 화면 연동용 초기값
-        recentReportCount: 0
       });
 
       navigate("/");
