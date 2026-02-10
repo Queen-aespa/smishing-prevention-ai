@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { getAuth } from "firebase/auth"; // [추가] Firebase Auth 임포트
 import { ReportSection } from "@/app/components/ReportSection";
@@ -8,6 +9,7 @@ import type { CriminalData } from "@/app/components/ReportSection";
 export default function ReportPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const API_URL = "http://localhost:8080/api/reports/web"; 
+  const navigate = useNavigate();
 
   const handleReport = async (data: CriminalData, files: File[]) => {
     if (isSubmitting) return;
@@ -16,8 +18,10 @@ export default function ReportPage() {
     const auth = getAuth();
     const currentUser = auth.currentUser;
 
+
     if (!currentUser) {
       toast.error("로그인이 필요한 서비스입니다.");
+      navigate('/login'); // 로그인 페이지 경로로 이동 (만약 회원가입 페이지라면 '/signup'으로 변경)
       return;
     }
 
