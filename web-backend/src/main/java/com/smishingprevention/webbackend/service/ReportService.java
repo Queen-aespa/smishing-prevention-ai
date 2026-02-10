@@ -3,6 +3,7 @@ package com.smishingprevention.webbackend.service;
 import com.smishingprevention.webbackend.dto.ReportDetailResponse;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,10 @@ import java.util.concurrent.ExecutionException;
 public class ReportService {
 
     public List<ReportDetailResponse> getAllReportsWithUserInfo() throws ExecutionException, InterruptedException {
+        if (FirebaseApp.getApps().isEmpty()) {
+            return new ArrayList<>();
+        }
+
         Firestore db = FirestoreClient.getFirestore();
         List<ReportDetailResponse> responseList = new ArrayList<>();
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 전용 가입 - 보안 모드</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <h2 style="color: #d946ef;">Master Admin</h2>
+        <p>관리자 마스터 키 인증</p>
+        
+        <form id="secureAdminForm">
+            <div class="input-group">
+                <label>관리자 이메일</label>
+                <input type="email" id="admEmail" placeholder="admin@secure.com" required>
+            </div>
+            
+            <div class="input-group">
+                <label>비밀번호</label>
+                <input type="password" id="admPw" placeholder="보안 비밀번호" required>
+            </div>
+
+            <div class="input-group">
+                <label style="color: #d946ef; font-weight: bold;">마스터 인증 키</label>
+                <input type="password" id="admKey" placeholder="Master Key 입력" required>
+            </div>
+
+            <button type="submit" class="btn-primary" style="background-color: #d946ef;">관리자 등록 실행</button>
+        </form>
+        
+        <div style="margin-top: 1rem;">
+            <a href="index.html">메인으로 돌아가기</a>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

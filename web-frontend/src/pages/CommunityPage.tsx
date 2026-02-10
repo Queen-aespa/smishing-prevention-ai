@@ -44,11 +44,23 @@ export default function CommunityPage() {
     const fetchReports = async () => {
       try {
         setLoading(true);
+        setError("");
         const response = await axios.get("http://localhost:8080/api/reports");
-        setReports(response.data);
+        setReports(Array.isArray(response.data) ? response.data : []);
       } catch (err) {
         console.error("데이터 로딩 실패:", err);
-        setError("서버 연결에 실패했습니다. 관리자에게 문의해주세요.");
+        if (axios.isAxiosError(err)) {
+          if (!err.response) {
+            setError("백엔드 서버 연결에 실패했습니다. 서버 실행 상태를 확인해주세요.");
+          } else if (err.response.status >= 500) {
+            setError("서버 내부 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+          } else {
+            setError(`요청 처리 중 오류가 발생했습니다. (HTTP ${err.response.status})`);
+          }
+        } else {
+          setError("알 수 없는 오류가 발생했습니다.");
+        }
+        setReports([]);
       } finally {
         setLoading(false);
       }
@@ -114,6 +126,11 @@ export default function CommunityPage() {
           <div className="flex h-40 flex-col items-center justify-center space-y-4 rounded-xl border border-border bg-card text-muted-foreground">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
             <p className="text-sm">데이터를 불러오는 중입니다...</p>
+          </div>
+        ) : !error && reports.length === 0 ? (
+          <div className="flex h-40 flex-col items-center justify-center space-y-2 rounded-xl border border-border bg-card text-muted-foreground">
+            <p className="text-sm font-medium">등록된 커뮤니티 제보가 아직 없습니다.</p>
+            <p className="text-xs">제보가 등록되면 이곳에 표시됩니다.</p>
           </div>
         ) : (
           <>
